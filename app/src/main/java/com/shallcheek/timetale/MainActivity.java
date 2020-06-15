@@ -20,19 +20,26 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private TimeTableView mTimaTableView;
     private List<TimeTableModel> mList;
+    TimeTableModelViewModel timeTableModelViewModel;
 String myLog="logg";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        timeTableModelViewModel = new ViewModelProvider(this).get(TimeTableModelViewModel.class);
+
         mList = new ArrayList<TimeTableModel>();
         mTimaTableView = (TimeTableView) findViewById(R.id.main_timetable_ly);
         addList();
@@ -47,33 +54,33 @@ String myLog="logg";
     }
 
     private void addList() {
-        mList.add(new TimeTableModel(0, 1, 2, 1,  "计算机操作系统",
+        mList.add(new TimeTableModel( 1, 2, 1,  "计算机操作系统",
                 "文勇", "逸夫楼504", "2-13"));
-        mList.add(new TimeTableModel(0, 3, 4, 1,  "计算机英语",
+        mList.add(new TimeTableModel( 3, 4, 1,  "计算机英语",
                 "刘美玲", "逸夫楼504", "2-13"));
-        mList.add(new TimeTableModel(0, 6, 7, 1,  "移动软件开发",
+        mList.add(new TimeTableModel( 6, 7, 1,  "移动软件开发",
                 "周卫", "逸夫楼506", "2-13"));
 
 
-        mList.add(new TimeTableModel(0, 6, 7, 2,  "Linux",
+        mList.add(new TimeTableModel( 6, 7, 2,  "Linux",
                 "靳庆庚", "逸夫楼506", "2-13"));
-        mList.add(new TimeTableModel(0, 8, 9, 2,  "计算机操作系统",
+        mList.add(new TimeTableModel(8, 9, 2,  "计算机操作系统",
                 "文勇", "逸夫楼506", "2-13"));
 
-        mList.add(new TimeTableModel(0, 1, 2, 3,  "计算机英语",
+        mList.add(new TimeTableModel( 1, 2, 3,  "计算机英语",
                 "刘美玲", "学友楼104", "2-13"));
 
-        mList.add(new TimeTableModel(0, 6, 7, 3, "软件设计模式",
+        mList.add(new TimeTableModel( 6, 7, 3, "软件设计模式",
                 "张纲强", "学友楼504", "2-13"));
-        mList.add(new TimeTableModel(0, 8, 9, 4, "软件设计模式",
+        mList.add(new TimeTableModel( 8, 9, 4, "软件设计模式",
                 "张纲强", "校友楼504", "2-13"));
-        mList.add(new TimeTableModel(0, 3, 5, 4, "Linux",
+        mList.add(new TimeTableModel(3, 5, 4, "Linux",
                 "靳庆庚", "校友楼401", "2-13"));
-        mList.add(new TimeTableModel(0, 6, 8, 5,  "C#",
+        mList.add(new TimeTableModel( 6, 8, 5,  "C#",
                 "谢宁新", "校友楼401", "2-13"));
-        mList.add(new TimeTableModel(0, 3, 5, 5,  "课程设计III",
+        mList.add(new TimeTableModel( 3, 5, 5,  "课程设计III",
                 "李熹", "校友楼401", "2-13"));
-        mList.add(new TimeTableModel(0, 9, 10, 3, "就业指导",
+        mList.add(new TimeTableModel( 9, 10, 3, "就业指导",
                 "潘艳艳", "学友楼402", "13-15"));
 
     }

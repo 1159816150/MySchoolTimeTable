@@ -1,6 +1,12 @@
 package com.shallcheek.timetale;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class TimeTableModel {
+	@PrimaryKey(autoGenerate = true)
 	private int id;
 	private int startnum;
 	private int endnum;
@@ -23,11 +29,12 @@ public class TimeTableModel {
 				", weeknum='" + weeknum + '\'' +
 				'}';
 	}
+	@Ignore
 	public TimeTableModel() {
 		super();
 	}
-	public TimeTableModel(int id, int startnum, int endnum, int week, String name, String teacher, String classroom, String weeknum) {
-		this.id = id;
+	public TimeTableModel(int startnum, int endnum, int week, String name, String teacher, String classroom, String weeknum) {
+
 		this.startnum = startnum;
 		this.endnum = endnum;
 		this.week = week;
