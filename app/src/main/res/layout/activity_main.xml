@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <Spinner
+
+        android:id="@+id/spinnerWeek"
+        android:layout_width="135dp"
+        android:layout_gravity="center"
+        android:layout_height="50dp"
+        android:paddingLeft="30dp"
+        android:entries="@array/weekNum" />
+    <ScrollView
+        android:id="@+id/main_scrollview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="false"
+        >
+
+        <com.shallcheek.timetale.TimeTableView
+            android:id="@+id/main_timetable_ly"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+        </com.shallcheek.timetale.TimeTableView>
+    </ScrollView>
+
+</LinearLayout>

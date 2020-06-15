@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#169ee5"
+        android:gravity="center"
+        android:text="请输入课程信息"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+
+
+    <EditText
+        android:id="@+id/className"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="课程名称:"
+        android:textSize="18sp" />
+    <EditText
+        android:id="@+id/classTeacher"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="任课老师："
+        android:textSize="18sp" />
+    <EditText
+        android:id="@+id/classRoom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="上课教室:"
+        android:textSize="18sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:paddingLeft="80dp"
+        android:paddingRight="5dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="星期"
+            android:textSize="20dp"
+         />
+
+
+    <Spinner
+        android:id="@+id/week"
+        android:layout_width="135dp"
+        android:layout_height="50dp"
+         android:paddingLeft="30dp"
+        android:entries="@array/week"
+     />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:paddingLeft="80dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="节次"
+            android:textSize="20dp"
+
+            />
+
+
+        <Spinner
+            android:id="@+id/number"
+            android:layout_width="135dp"
+            android:layout_height="50dp"
+            android:paddingLeft="30dp"
+            android:entries="@array/number" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:paddingLeft="50dp"
+        android:paddingRight="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="周次"
+            android:textSize="20dp"
+
+            />
+
+        <EditText
+            android:id="@+id/weekStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="StartNum"
+            android:inputType="number"
+            android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textSize="20dp"
+
+            />
+        <EditText
+            android:id="@+id/weekend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="endNum"
+            android:inputType="number"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:orientation="horizontal"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="#169ee5"
+            android:text="取消"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#169ee5"
+            android:text="添加"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
