@@ -5,16 +5,26 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Canvas;
 import androidx.annotation.NonNull;
+
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -164,9 +174,7 @@ public class TimeTableView extends LinearLayout {
             String Num=timeTableModel.getWeeknum();
             String weekNumStart=Num.substring(0,Num.indexOf("-"));
             String weekNumEnd=Num.substring(Num.indexOf("-")+1,Num.length());
-            Log.d("logg",weekNumStart+"-"+weekNumEnd);
-
-            if (timeTableModel.getWeek() == week && Integer.parseInt(weekNumStart)<=weekNum+1 &&Integer.parseInt(weekNumEnd)>=weekNum) {
+            if (timeTableModel.getWeek() == week && Integer.parseInt(weekNumStart)<=weekNum &&Integer.parseInt(weekNumEnd)>=weekNum) {
                 list.add(timeTableModel);
             }
         }
@@ -297,7 +305,7 @@ public class TimeTableView extends LinearLayout {
      */
     @SuppressWarnings("deprecation")
     private View createClassView(final TimeTableModel model) {
-        LinearLayout mTimeTableView = new LinearLayout(getContext());
+        final LinearLayout mTimeTableView = new LinearLayout(getContext());
         mTimeTableView.setOrientation(VERTICAL);
         int num = (model.getEndnum() - model.getStartnum());
         mTimeTableView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px((num + 1) * TIME_TABLE_HEIGHT) + (num + 1) * TIME_TABLE_LINE_HEIGHT));
@@ -319,7 +327,9 @@ public class TimeTableView extends LinearLayout {
         mTimeTableView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), model.getName() + "@" + model.getClassroom(), Toast.LENGTH_LONG).show();
+
+                customDialog(model);
+                // Toast.makeText(getContext(), model.getName() + "@" + model.getClassroom(), Toast.LENGTH_LONG).show();
             }
         });
         return mTimeTableView;
@@ -383,4 +393,121 @@ public class TimeTableView extends LinearLayout {
         }
         return num;
     }
+
+    /**
+     * 自定义添加课表框
+     */
+    public void customDialog(TimeTableModel timeTableModel) {
+        final TimeTableModel tableModel = new TimeTableModel();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final AlertDialog dialog = builder.create();
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.activity_custom, null);
+        dialog.setView(dialogView);
+        dialog.show();
+        final Spinner weekS = dialogView.findViewById(R.id.week);
+        final Spinner numberS = dialogView.findViewById(R.id.number);
+        final EditText className = dialogView.findViewById(R.id.className);
+        final EditText classTeacher = dialogView.findViewById(R.id.classTeacher);
+        final EditText weekStart = dialogView.findViewById(R.id.weekStart);
+        final EditText weekEnd = dialogView.findViewById(R.id.weekend);
+        final EditText classRoom = dialogView.findViewById(R.id.classRoom);
+        final Button btn_login = dialogView.findViewById(R.id.btn_login);
+        final Button btn_cancel = dialogView.findViewById(R.id.btn_cancel);
+        btn_login.setText("删除");
+        className.setText(timeTableModel.getName());
+        classTeacher.setText(timeTableModel.getTeacher());
+        classRoom.setText(timeTableModel.getClassroom());
+        String Num=timeTableModel.getWeeknum();
+        String weekNumStart=Num.substring(0,Num.indexOf("-"));
+        String weekNumEnd=Num.substring(Num.indexOf("-")+1,Num.length());
+        int classStartNum = 0;
+        if(timeTableModel.getStartnum()==1){
+             classStartNum=timeTableModel.getStartnum()-1;
+        }else if(timeTableModel.getStartnum()==3) {
+            classStartNum = timeTableModel.getStartnum() - 2;
+        }else if(timeTableModel.getStartnum()==5) {
+            classStartNum = timeTableModel.getStartnum() - 3;
+        }else if(timeTableModel.getStartnum()==7) {
+            classStartNum = timeTableModel.getStartnum() - 4;
+        }else if(timeTableModel.getStartnum()==9) {
+            classStartNum = timeTableModel.getStartnum() - 5;
+        }
+
+        Log.d("myLog",String.valueOf(classStartNum)+"_"+String.valueOf(timeTableModel.getStartnum()));
+        
+        weekStart.setText(weekNumStart);
+        weekEnd.setText(weekNumEnd);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.week, android.R.layout.simple_spinner_item);
+        weekS.setAdapter(adapter);
+        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),
+                R.array.number, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        numberS.setAdapter(adapter1);
+        weekS.setSelection(timeTableModel.getWeek()-1, true);
+        numberS.setSelection(classStartNum, true);
+        weekS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //获取选择的元素，注意还要传入R.array.weekdata文件
+                String week = getContext().getResources().getStringArray(R.array.week)[position];     //获取选择的item内容
+                //输出看看
+              //  Toast.makeText(getContext(), "获取：" + String.valueOf(getInt(week)), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        numberS.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //获取选择的元素，注意还要传入R.array.weekdata文件
+                String number = getContext().getResources().getStringArray(R.array.number)[position];     //获取选择的item内容
+                String startNum = number.substring(0, number.indexOf("–"));
+                //获取结果值
+                String endNum = number.substring(number.indexOf("–") + 1, number.length());
+                tableModel.setStartnum(Integer.parseInt(startNum));
+                tableModel.setEndnum(Integer.parseInt(endNum));
+                Toast.makeText(getContext(), "获取：" + number, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String name = className.getText().toString();
+                String teacher = classTeacher.getText().toString();
+                String room = classRoom.getText().toString();
+                String weekS = weekStart.getText().toString();
+                String weekE = weekEnd.getText().toString();
+                String weekNum = weekS + "-" + weekE;
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(teacher) || TextUtils.isEmpty(room)) {
+                    Toast.makeText(getContext(), "课程名称或任课老师或上课教室不能为空!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                tableModel.setId(0);
+                tableModel.setName(name);
+                tableModel.setTeacher(teacher);
+                tableModel.setClassroom(room);
+                tableModel.setWeeknum(weekNum);
+                TimeTableModelDao timeTableModelViewModel = null;
+                timeTableModelViewModel.deleteTimeTableModel(tableModel);
+                dialog.dismiss();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+    }
+
 }

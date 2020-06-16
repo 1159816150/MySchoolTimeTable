@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TimeTableView mTimaTableView;
     private List<TimeTableModel> mList;
     private Button addClassButton;
-    private int weekNumber=0;
+    private int weekNumber=2;
     boolean ifFirst = true;
     TimeTableModelViewModel timeTableModelViewModel;
     String myLog = "logg";
@@ -107,23 +107,23 @@ public class MainActivity extends AppCompatActivity {
                 "文勇", "逸夫楼504", "2-13"));
         mList.add(new TimeTableModel(3, 4, 1, "计算机英语",
                 "刘美玲", "逸夫楼504", "2-13"));
-        mList.add(new TimeTableModel(6, 7, 1, "移动软件开发",
+        mList.add(new TimeTableModel(5, 6, 1, "移动软件开发",
                 "周卫", "逸夫楼506", "2-13"));
-        mList.add(new TimeTableModel(6, 7, 2, "Linux",
+        mList.add(new TimeTableModel(7, 8, 2, "Linux",
                 "靳庆庚", "逸夫楼506", "2-13"));
-        mList.add(new TimeTableModel(8, 9, 2, "计算机操作系统",
+        mList.add(new TimeTableModel(9, 10, 2, "计算机操作系统",
                 "文勇", "逸夫楼506", "2-13"));
         mList.add(new TimeTableModel(1, 2, 3, "计算机英语",
                 "刘美玲", "学友楼104", "2-13"));
-        mList.add(new TimeTableModel(6, 7, 3, "软件设计模式",
+        mList.add(new TimeTableModel(5, 6, 3, "软件设计模式",
                 "张纲强", "学友楼504", "2-13"));
-        mList.add(new TimeTableModel(8, 9, 4, "软件设计模式",
+        mList.add(new TimeTableModel(7, 8, 4, "软件设计模式",
                 "张纲强", "校友楼504", "2-13"));
-        mList.add(new TimeTableModel(3, 5, 4, "Linux",
+        mList.add(new TimeTableModel(3, 4, 4, "Linux",
                 "靳庆庚", "校友楼401", "2-13"));
-        mList.add(new TimeTableModel(6, 8, 5, "C#",
+        mList.add(new TimeTableModel(5, 6, 5, "C#",
                 "谢宁新", "校友楼401", "2-13"));
-        mList.add(new TimeTableModel(3, 5, 5, "课程设计III",
+        mList.add(new TimeTableModel(3, 4, 5, "课程设计III",
                 "李熹", "校友楼401", "2-13"));
         mList.add(new TimeTableModel(9, 10, 3, "就业指导",
                 "潘艳艳", "学友楼402", "13-15"));
@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
         final EditText classRoom = dialogView.findViewById(R.id.classRoom);
         final Button btn_login = dialogView.findViewById(R.id.btn_login);
         final Button btn_cancel = dialogView.findViewById(R.id.btn_cancel);
+        btn_login.setText("添加");
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.week, android.R.layout.simple_spinner_item);
         weekS.setAdapter(adapter);
