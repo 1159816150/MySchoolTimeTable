@@ -15,6 +15,7 @@ public class TimeTableModel {
 	private String teacher="";
 	private String classroom="";
 	private String weeknum="";
+	public boolean isWeenNum;
 
 	@Override
 	public String toString() {
@@ -27,8 +28,10 @@ public class TimeTableModel {
 				", teacher='" + teacher + '\'' +
 				", classroom='" + classroom + '\'' +
 				", weeknum='" + weeknum + '\'' +
+				", isWeenNum=" + isWeenNum +
 				'}';
 	}
+
 	@Ignore
 	public TimeTableModel() {
 		super();
@@ -42,6 +45,14 @@ public class TimeTableModel {
 		this.teacher = teacher;
 		this.classroom = classroom;
 		this.weeknum = weeknum;
+	}
+
+	public boolean isWeenNum() {
+		return isWeenNum;
+	}
+
+	public void setWeenNum(boolean weenNum) {
+		isWeenNum = weenNum;
 	}
 
 	public int getId() {

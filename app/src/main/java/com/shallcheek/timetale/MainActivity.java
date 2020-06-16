@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -32,6 +33,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private TimeTableView mTimaTableView;
     private List<TimeTableModel> mList;
+    Button addClassButton;
     TimeTableModelViewModel timeTableModelViewModel;
 String myLog="logg";
     @Override
@@ -39,12 +41,24 @@ String myLog="logg";
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         timeTableModelViewModel = new ViewModelProvider(this).get(TimeTableModelViewModel.class);
-
+        addClassButton=findViewById(R.id.addClass);
         mList = new ArrayList<TimeTableModel>();
         mTimaTableView = (TimeTableView) findViewById(R.id.main_timetable_ly);
+
+//        timeTableModelViewModel.getAllTimeTableModelLive().observe(this, new Observer<List<TimeTableModel>>() {
+//            @Override
+//            public void onChanged(List<TimeTableModel> timeTableModels) {
+//                mList=timeTableModels;
+//            }
+//        });
         addList();
         mTimaTableView.setTimeTable(mList);
-
+          addClassButton.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View view) {
+                  customDialog();
+              }
+          });
     }
 
     @Override
@@ -169,6 +183,7 @@ String myLog="logg";
                 mList.add(tableModel);
              //   Toast.makeText(MainActivity.this, "课程名称：" + name + "\n" + "任课老师：" + teacher + "上课教室" + room + "\n", Toast.LENGTH_SHORT).show();
                 Log.d(myLog, tableModel.toString());
+                mTimaTableView.removeAllViews();
                 mTimaTableView.setTimeTable(mList);
                 dialog.dismiss();
             }

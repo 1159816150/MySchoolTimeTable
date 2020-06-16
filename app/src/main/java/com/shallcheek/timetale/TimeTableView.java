@@ -102,6 +102,9 @@ public class TimeTableView extends LinearLayout {
 
     private void initView() {
 
+//       if (mHorizontalWeekLayout!=null||mVerticalWeekLaout!=null){
+//
+//       }
         mHorizontalWeekLayout = new LinearLayout(getContext());
         mHorizontalWeekLayout.setOrientation(HORIZONTAL);
         mVerticalWeekLaout = new LinearLayout(getContext());
@@ -233,6 +236,7 @@ public class TimeTableView extends LinearLayout {
             classView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     Toast.makeText(getContext(), "星期" + week + "第" + (start + num) + "节", Toast.LENGTH_LONG).show();
                 }
             });
@@ -322,10 +326,12 @@ public class TimeTableView extends LinearLayout {
     }
 
     public void setTimeTable(List<TimeTableModel> mlist) {
+
         this.mListTimeTable = mlist;
         for (TimeTableModel timeTableModel : mlist) {
             addTimeName(timeTableModel.getName());
         }
+
         initView();
         invalidate();
     }

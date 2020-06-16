@@ -19,6 +19,6 @@ public interface TimeTableModelDao {
     void deleteTimeTableModel(TimeTableModel... timeTableModels);
     @Query("delete from TimeTableModel")
     void  deleteAllTimeTableModel();
-    @Query("select * from TimeTableModel order by id desc")
+    @Query("select * from TimeTableModel")
     LiveData<List<TimeTableModel>> getAllTimeTableModelsLive();
 }

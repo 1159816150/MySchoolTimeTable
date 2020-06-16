@@ -8,12 +8,12 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class TimeTableModelRepository {
-    LiveData<List<TimeTableModel>> allTimeTableModelLive;
-    TimeTableModelDao timeTableModelDao;
+    private LiveData<List<TimeTableModel>> allTimeTableModelLive;
+    private TimeTableModelDao timeTableModelDao;
     TimeTableModelRepository(Context context){
         TimeTableModelDatabase timeTableModelDatabase = TimeTableModelDatabase.getDatabase(context.getApplicationContext());
         timeTableModelDao =  timeTableModelDatabase.getTimeTableModelDao();
-        //allTimeTableModelLive= timeTableModelDao.getAllTimeTableModelsLive();
+        //  allTimeTableModelLive= timeTableModelDao.getAllTimeTableModelsLive();
     }
     public LiveData<List<TimeTableModel>> getAllTimeTableModelLive() {
         return allTimeTableModelLive;

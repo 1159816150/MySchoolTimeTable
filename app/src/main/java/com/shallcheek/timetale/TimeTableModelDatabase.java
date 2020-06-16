@@ -28,7 +28,7 @@ public abstract class TimeTableModelDatabase extends RoomDatabase {
     static final Migration MIGRATION_1_2 =new Migration(1,2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-            database.execSQL("ALTER TABLE TimeTableModel ADD COLUMN chineseInvisible INTEGER not null default 0");
+            database.execSQL("ALTER TABLE TimeTableModel ADD COLUMN isWeenNum INTEGER not null default 0");
         }
     };
 }
