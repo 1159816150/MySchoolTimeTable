@@ -21,9 +21,7 @@ public abstract class TimeTableModelDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
-    TimeTableModelDao getTimeTableModelDao() {
-        return null;
-    }
+    abstract TimeTableModelDao getTimeTableModelDao() ;
 
     static final Migration MIGRATION_1_2 =new Migration(1,2) {
         @Override

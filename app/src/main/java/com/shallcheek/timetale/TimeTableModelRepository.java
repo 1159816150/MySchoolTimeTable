@@ -13,7 +13,7 @@ public class TimeTableModelRepository {
     TimeTableModelRepository(Context context){
         TimeTableModelDatabase timeTableModelDatabase = TimeTableModelDatabase.getDatabase(context.getApplicationContext());
         timeTableModelDao =  timeTableModelDatabase.getTimeTableModelDao();
-        //  allTimeTableModelLive= timeTableModelDao.getAllTimeTableModelsLive();
+          allTimeTableModelLive= timeTableModelDao.getAllTimeTableModelsLive();
     }
     public LiveData<List<TimeTableModel>> getAllTimeTableModelLive() {
         return allTimeTableModelLive;

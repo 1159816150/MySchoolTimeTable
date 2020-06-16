@@ -9,6 +9,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import androidx.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,8 +59,16 @@ public class TimeTableView extends LinearLayout {
     public static String[] colorStr = new String[20];
     int colorNum = 0;
     private List<TimeTableModel> mListTimeTable = new ArrayList<TimeTableModel>();
-
     private Context mContext;
+    private int weekNum;
+
+    public int getWeekNum() {
+        return weekNum;
+    }
+
+    public void setWeekNum(int weekNum) {
+        this.weekNum = weekNum;
+    }
 
     public TimeTableView(Context context) {
         super(context);
@@ -100,11 +109,8 @@ public class TimeTableView extends LinearLayout {
     }
 
 
-    private void initView() {
-
-//       if (mHorizontalWeekLayout!=null||mVerticalWeekLaout!=null){
-//
-//       }
+    private void initView(int WNumber) {
+        weekNum=WNumber;
         mHorizontalWeekLayout = new LinearLayout(getContext());
         mHorizontalWeekLayout.setOrientation(HORIZONTAL);
         mVerticalWeekLaout = new LinearLayout(getContext());
@@ -155,7 +161,12 @@ public class TimeTableView extends LinearLayout {
     private List<TimeTableModel> findWeekClassList(int week) {
         List<TimeTableModel> list = new ArrayList<>();
         for (TimeTableModel timeTableModel : mListTimeTable) {
-            if (timeTableModel.getWeek() == week) {
+            String Num=timeTableModel.getWeeknum();
+            String weekNumStart=Num.substring(0,Num.indexOf("-"));
+            String weekNumEnd=Num.substring(Num.indexOf("-")+1,Num.length());
+            Log.d("logg",weekNumStart+"-"+weekNumEnd);
+
+            if (timeTableModel.getWeek() == week && Integer.parseInt(weekNumStart)<=weekNum+1 &&Integer.parseInt(weekNumEnd)>=weekNum) {
                 list.add(timeTableModel);
             }
         }
@@ -325,14 +336,14 @@ public class TimeTableView extends LinearLayout {
         return (int) (dpValue * scale);
     }
 
-    public void setTimeTable(List<TimeTableModel> mlist) {
+    public void setTimeTable(List<TimeTableModel> mlist,int Number) {
 
         this.mListTimeTable = mlist;
         for (TimeTableModel timeTableModel : mlist) {
             addTimeName(timeTableModel.getName());
         }
 
-        initView();
+        initView(Number);
         invalidate();
     }
 

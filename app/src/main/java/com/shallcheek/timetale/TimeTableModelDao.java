@@ -12,11 +12,11 @@ import java.util.List;
 @Dao
 public interface TimeTableModelDao {
     @Insert
-    void insertTimeTableModel(TimeTableModel... timeTableModels);
+    void insertTimeTableModel(TimeTableModel ... timeTableModels);
     @Update
-    void  updateTimeTableModel(TimeTableModel... timeTableModels);
+    void  updateTimeTableModel(TimeTableModel ... timeTableModels);
     @Delete
-    void deleteTimeTableModel(TimeTableModel... timeTableModels);
+    void deleteTimeTableModel(TimeTableModel ... timeTableModels);
     @Query("delete from TimeTableModel")
     void  deleteAllTimeTableModel();
     @Query("select * from TimeTableModel")
