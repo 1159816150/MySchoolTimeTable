@@ -481,23 +481,24 @@ public class TimeTableView extends LinearLayout {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String name = className.getText().toString();
-                String teacher = classTeacher.getText().toString();
-                String room = classRoom.getText().toString();
-                String weekS = weekStart.getText().toString();
-                String weekE = weekEnd.getText().toString();
-                String weekNum = weekS + "-" + weekE;
-                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(teacher) || TextUtils.isEmpty(room)) {
-                    Toast.makeText(getContext(), "课程名称或任课老师或上课教室不能为空!", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                tableModel.setId(0);
-                tableModel.setName(name);
-                tableModel.setTeacher(teacher);
-                tableModel.setClassroom(room);
-                tableModel.setWeeknum(weekNum);
-                TimeTableModelDao timeTableModelViewModel = null;
-                timeTableModelViewModel.deleteTimeTableModel(tableModel);
+                Toast.makeText(getContext(), "无删除功能", Toast.LENGTH_SHORT).show();
+//                String name = className.getText().toString();
+//                String teacher = classTeacher.getText().toString();
+//                String room = classRoom.getText().toString();
+//                String weekS = weekStart.getText().toString();
+//                String weekE = weekEnd.getText().toString();
+//                String weekNum = weekS + "-" + weekE;
+//                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(teacher) || TextUtils.isEmpty(room)) {
+//                    Toast.makeText(getContext(), "课程名称或任课老师或上课教室不能为空!", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                tableModel.setId(0);
+//                tableModel.setName(name);
+//                tableModel.setTeacher(teacher);
+//                tableModel.setClassroom(room);
+//                tableModel.setWeeknum(weekNum);
+//                TimeTableModelDao timeTableModelViewModel = null;
+//                timeTableModelViewModel.deleteTimeTableModel(tableModel);
                 dialog.dismiss();
             }
         });

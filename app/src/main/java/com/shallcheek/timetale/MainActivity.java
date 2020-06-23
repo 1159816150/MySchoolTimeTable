@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private TimeTableView mTimaTableView;
     private List<TimeTableModel> mList;
     private Button addClassButton;
-    private int weekNumber=2;
+    private int weekNumber = 2;
     boolean ifFirst = true;
     TimeTableModelViewModel timeTableModelViewModel;
     String myLog = "logg";
@@ -45,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         addClassButton = findViewById(R.id.addClass);
         mList = new ArrayList<TimeTableModel>();
         mTimaTableView = (TimeTableView) findViewById(R.id.main_timetable_ly);
-         getWeekNumber();
+        getWeekNumber();
         timeTableModelViewModel.getAllTimeTableModelLive().observe(this, new Observer<List<TimeTableModel>>() {
             @Override
             public void onChanged(List<TimeTableModel> timeTableModels) {
                 mList = timeTableModels;
                 mTimaTableView.removeAllViews();
-                mTimaTableView.setTimeTable(mList,weekNumber);
+                mTimaTableView.setTimeTable(mList, weekNumber);
             }
         });
         if (ifFirst) {
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
             ifFirst = false;
         }
-        mTimaTableView.setTimeTable(mList,weekNumber);
+        mTimaTableView.setTimeTable(mList, weekNumber);
         addClassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 String Num = weekNum.substring(1, weekNum.length() - 1);
                 weekNumber = getWeekNumInt(Num);
                 mTimaTableView.removeAllViews();
-                mTimaTableView.setTimeTable(mList,weekNumber);
+                mTimaTableView.setTimeTable(mList, weekNumber);
                 Toast.makeText(MainActivity.this, "获取：" + String.valueOf(getWeekNumInt(Num)), Toast.LENGTH_SHORT).show();
             }
 
